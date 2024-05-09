@@ -15,12 +15,15 @@ pipeline {
 	NEXUS_REPO_ID    = "vprofile-release"
         NEXUS_CREDENTIAL_ID = "nexuslogin"
         ARTVERSION = "${env.BUILD_ID}"
+        M2_HOME='/opt/apache-maven-3.6.3'
+        PATH="$M2_HOME/bin:$PATH"
     }
 	
     stages{
         
         stage('BUILD'){
             steps {
+	        sh 'export PATH'
                 sh 'mvn clean install -DskipTests'
             }
             post {
